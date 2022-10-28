@@ -51,7 +51,11 @@ struct DeleteStationView: View {
 // MARK: - Previews
 
 struct DeleteStationView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeleteStationView(isPresented: .constant(true), userData: UserData())
+    
+	static var previews: some View {
+		let data = UserData()
+		data.stationList = UserData.defaultStationList
+		
+        return DeleteStationView(isPresented: .constant(true), userData: data)
     }
 }

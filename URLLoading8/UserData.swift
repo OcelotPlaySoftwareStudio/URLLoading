@@ -8,9 +8,9 @@
 import Foundation
 
 class UserData: ObservableObject {
-    @Published var stationList: [StationItem]
+    @Published var stationList: [StationItem] = []
     
-    let defaultStationList = [
+    static let defaultStationList = [
         StationItem(name: "横浜", latitude: 35.466182, longitude: 139.622062),
         StationItem(name: "札幌", latitude: 43.068825, longitude: 141.351162),
         StationItem(name: "東京", latitude: 35.681497, longitude: 139.767189),
@@ -18,12 +18,7 @@ class UserData: ObservableObject {
         StationItem(name: "大阪", latitude: 34.702652, longitude: 135.496401),
         StationItem(name: "博多", latitude: 33.589870, longitude: 130.421156)
     ]
-    
-    // for Previews
-    init() {
-        self.stationList = self.defaultStationList
-    }
-    
+        
     func saveStationList() {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let archive = "data.archive"
@@ -38,7 +33,6 @@ class UserData: ObservableObject {
     }
     
     func loadStationList() {
-        stationList = []
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let archive = "data.archive"
         let archiveUrl = documentDirectory.appendingPathComponent(archive)
@@ -52,7 +46,7 @@ class UserData: ObservableObject {
         
         if stationList.isEmpty {
             print("No saved station list.")
-            stationList = defaultStationList
+			stationList = Self.defaultStationList
         } else {
             print(stationList)
         }

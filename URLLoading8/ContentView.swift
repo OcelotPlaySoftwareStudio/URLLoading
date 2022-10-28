@@ -37,7 +37,7 @@ struct ContentView: View {
             }
             .disabled(userData.stationList.isEmpty)
             .sheet(isPresented: $isShowingPageView) {
-                PageView(selectedStation: selectedStation, isPresented: $isShowingPageView, userData: userData, stationChanged: true)
+				PageView(station: userData.stationList[selectedStation], stationChanged: true)
             }
             .padding()
             

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct PageView: View {
-    let selectedStation: Int
-    @Binding var isPresented: Bool
-    @ObservedObject var userData: UserData
+	@Environment(\.dismiss) var dismiss
+	
+	var station: StationItem
     
     @State var stationChanged: Bool
     @State var urlString = ""
@@ -30,8 +30,8 @@ struct PageView: View {
             }
             .onAppear {
                 if stationChanged {
-                    urlString = userData.stationList[selectedStation].urlString // エラー（Fatal error: Index out of range）が出る時がある
-                    Task {
+                    urlString = station.urlString
+					Task {
                         await search()
                     }
                     stationChanged = false
@@ -41,7 +41,7 @@ struct PageView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        isPresented = false
+                        dismiss()
                     } label: {
                         Text("Close")
                     }
@@ -84,6 +84,9 @@ struct PageView: View {
 
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
-        PageView(selectedStation: 0, isPresented: .constant(true), userData: UserData(), stationChanged: true)
+		let data = UserData()
+		data.stationList = UserData.defaultStationList
+
+		return PageView(station: UserData.defaultStationList[0], stationChanged: true)
     }
 }
