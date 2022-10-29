@@ -1,14 +1,14 @@
 //
-//  URLLoading8App.swift
-//  URLLoading8
+//  URLLoading9App.swift
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import SwiftUI
 
 @main
-struct URLLoading8App: App {
+struct URLLoading9App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -1,8 +1,8 @@
 //
 //  StationItem.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import Foundation

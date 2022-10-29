@@ -1,14 +1,14 @@
 //
 //  DeleteStationView.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import SwiftUI
 
 struct DeleteStationView: View {
-    @Binding var isPresented: Bool
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var userData: UserData
     
     // MARK: - Views
@@ -32,7 +32,7 @@ struct DeleteStationView: View {
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            isPresented = false
+                            dismiss()
                         } label: {
                             Text("Close")
                         }
@@ -51,11 +51,7 @@ struct DeleteStationView: View {
 // MARK: - Previews
 
 struct DeleteStationView_Previews: PreviewProvider {
-    
-	static var previews: some View {
-		let data = UserData()
-		data.stationList = UserData.defaultStationList
-		
-        return DeleteStationView(isPresented: .constant(true), userData: data)
+    static var previews: some View {
+        DeleteStationView(userData: UserData.test())
     }
 }

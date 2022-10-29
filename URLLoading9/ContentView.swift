@@ -1,14 +1,14 @@
 //
 //  ContentView.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var userData: UserData = UserData()
+    @StateObject var userData: UserData = UserData(stationList: [])
 
     @State var selectedStation = 0
     @State var isShowingPageView = false
@@ -37,7 +37,7 @@ struct ContentView: View {
             }
             .disabled(userData.stationList.isEmpty)
             .sheet(isPresented: $isShowingPageView) {
-				PageView(station: userData.stationList[selectedStation], stationChanged: true)
+                PageView(selectedStation: selectedStation, userData: userData, stationChanged: true)
             }
             .padding()
             
@@ -47,7 +47,7 @@ struct ContentView: View {
                 Text("Add station")
             }
             .sheet(isPresented: $isShowingAddStationView) {
-                AddStationView(isPresented: $isShowingAddStationView, userData: userData)
+                AddStationView(userData: userData)
             }
             
             Button(action: {
@@ -57,7 +57,7 @@ struct ContentView: View {
             }
             .disabled(userData.stationList.isEmpty)
             .sheet(isPresented: $isShowingDeleteStationView) {
-                DeleteStationView(isPresented: $isShowingDeleteStationView, userData: userData)
+                DeleteStationView(userData: userData)
             }
             .padding()
         }
@@ -73,6 +73,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(userData: UserData.test())
     }
 }

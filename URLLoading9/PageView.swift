@@ -1,16 +1,16 @@
 //
 //  PageView.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import SwiftUI
 
 struct PageView: View {
-	@Environment(\.dismiss) var dismiss
-	
-	var station: StationItem
+    let selectedStation: Int
+    @Environment(\.dismiss) var dismiss
+    @ObservedObject var userData: UserData
     
     @State var stationChanged: Bool
     @State var urlString = ""
@@ -30,8 +30,8 @@ struct PageView: View {
             }
             .onAppear {
                 if stationChanged {
-                    urlString = station.urlString
-					Task {
+                    urlString = userData.stationList[selectedStation].urlString // エラー（Fatal error: Index out of range）が出る時がある
+                    Task {
                         await search()
                     }
                     stationChanged = false
@@ -84,9 +84,6 @@ struct PageView: View {
 
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
-		let data = UserData()
-		data.stationList = UserData.defaultStationList
-
-		return PageView(station: UserData.defaultStationList[0], stationChanged: true)
+        PageView(selectedStation: 0, userData: UserData.test(), stationChanged: true)
     }
 }

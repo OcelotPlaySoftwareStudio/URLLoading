@@ -1,24 +1,19 @@
 //
 //  UserData.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import Foundation
 
 class UserData: ObservableObject {
-    @Published var stationList: [StationItem] = []
+    @Published var stationList: [StationItem]
     
-    static let defaultStationList = [
-        StationItem(name: "横浜", latitude: 35.466182, longitude: 139.622062),
-        StationItem(name: "札幌", latitude: 43.068825, longitude: 141.351162),
-        StationItem(name: "東京", latitude: 35.681497, longitude: 139.767189),
-        StationItem(name: "名古屋", latitude: 35.171092, longitude: 136.881568),
-        StationItem(name: "大阪", latitude: 34.702652, longitude: 135.496401),
-        StationItem(name: "博多", latitude: 33.589870, longitude: 130.421156)
-    ]
-        
+    init(stationList: [StationItem]) {
+        self.stationList = stationList
+    }
+    
     func saveStationList() {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let archive = "data.archive"
@@ -46,9 +41,21 @@ class UserData: ObservableObject {
         
         if stationList.isEmpty {
             print("No saved station list.")
-			stationList = Self.defaultStationList
         } else {
             print(stationList)
         }
+    }
+    
+    // for Previews
+    static func test() -> UserData {
+        let defaultStationList = [
+            StationItem(name: "横浜", latitude: 35.466182, longitude: 139.622062),
+            StationItem(name: "札幌", latitude: 43.068825, longitude: 141.351162),
+            StationItem(name: "東京", latitude: 35.681497, longitude: 139.767189),
+            StationItem(name: "名古屋", latitude: 35.171092, longitude: 136.881568),
+            StationItem(name: "大阪", latitude: 34.702652, longitude: 135.496401),
+            StationItem(name: "博多", latitude: 33.589870, longitude: 130.421156)
+        ]
+        return UserData(stationList: defaultStationList)
     }
 }

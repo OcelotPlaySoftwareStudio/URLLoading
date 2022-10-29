@@ -1,8 +1,8 @@
 //
 //  DataConverter.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import Foundation
@@ -36,6 +36,7 @@ struct Page: Codable, Comparable {
     let pageid: Int
     let title: String
     let terms: [String: [String]]?
+    let coordinates: [Coordinates]
     
     var description: String {
         terms?["description"]?.first ?? "No further info..."
@@ -45,3 +46,8 @@ struct Page: Codable, Comparable {
         return lhs.title < rhs.title
     }
  }
+
+struct Coordinates: Codable, Equatable {
+    let lat: Double
+    let lon: Double
+}

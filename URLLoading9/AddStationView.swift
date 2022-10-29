@@ -1,8 +1,8 @@
 //
 //  AddStationView.swift
-//  URLLoading8
+//  URLLoading9
 //  
-//  Created by e.hasegawa on 2022/10/07.
+//  Created by e.hasegawa on 2022/10/11.
 //  
 
 import SwiftUI
@@ -10,7 +10,6 @@ import MapKit
 
 struct AddStationView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var isPresented: Bool
     @ObservedObject var userData: UserData
     
     @State var stationName = ""
@@ -60,7 +59,7 @@ struct AddStationView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        isPresented = false
+                        dismiss()
                     } label: {
                         Text("Close")
                     }
@@ -97,6 +96,6 @@ struct AddStationView: View {
 
 struct AddStationView_Previews: PreviewProvider {
     static var previews: some View {
-        AddStationView(isPresented: .constant(true), userData: UserData())
+        AddStationView(userData: UserData.test())
     }
 }
