@@ -3,7 +3,8 @@
 //  URLLoading9
 //  
 //  Created by e.hasegawa on 2022/10/11.
-//  
+//
+// Pull Request Test (2022Nov7)
 
 import SwiftUI
 
